@@ -1,10 +1,7 @@
 package cleancode.minesweeper.tobe;
 
 
-import cleancode.minesweeper.tobe.cell.Cell;
-import cleancode.minesweeper.tobe.cell.EmptyCell;
-import cleancode.minesweeper.tobe.cell.LandMineCell;
-import cleancode.minesweeper.tobe.cell.NumberCell;
+import cleancode.minesweeper.tobe.cell.*;
 import cleancode.minesweeper.tobe.gamelevel.GameLevel;
 
 import java.util.Arrays;
@@ -121,7 +118,7 @@ public class GameBoard {
     public boolean isAllCellChecked() {
         return Arrays.stream(board)
                 .flatMap(Arrays::stream)
-                .allMatch(cell-> cell.isChecked());
+                .allMatch(Cell::isChecked);
     }
 
     private int countNearbyLandMines(int row, int col) {
