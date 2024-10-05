@@ -29,7 +29,6 @@ public class Minesweeper implements GameRunnable, GameInitializable {
     public void run() {
         outputHandler.showGameStartComment();
 
-
         while (true) {
             try {
                 outputHandler.showBoard(gameBoard);
@@ -76,12 +75,9 @@ public class Minesweeper implements GameRunnable, GameInitializable {
         throw new GameException("잘못된 번호를 선택하셨습니다.");
     }
 
-
     private void changeGameStatusToLose() {
         gameStatus = -1;
     }
-
-
 
     private boolean doesUserChooseToOpenCell(String userActionInput) {
         return userActionInput.equals("1");
@@ -90,8 +86,6 @@ public class Minesweeper implements GameRunnable, GameInitializable {
     private boolean doseUserChooseToPlantFlag(String userActionInput) {
         return userActionInput.equals("2");
     }
-
-
 
     private String getUserActionInputFromUser() {
         outputHandler.showCommentForUserAction();
@@ -124,14 +118,6 @@ public class Minesweeper implements GameRunnable, GameInitializable {
     private void changeGameStatusToWin() {
         gameStatus = 1;
     }
-
-
-
-
-
-
-
-
 
 }
 
