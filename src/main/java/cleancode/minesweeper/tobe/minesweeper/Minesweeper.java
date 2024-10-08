@@ -1,13 +1,13 @@
 package cleancode.minesweeper.tobe.minesweeper;
 
-import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
-import cleancode.minesweeper.tobe.minesweeper.config.GameConfig;
-import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.game.GameInitializable;
 import cleancode.minesweeper.tobe.game.GameRunnable;
+import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
+import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
+import cleancode.minesweeper.tobe.minesweeper.config.GameConfig;
+import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.minesweeper.io.InputHandler;
 import cleancode.minesweeper.tobe.minesweeper.io.OutputHandler;
-import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
 import cleancode.minesweeper.tobe.minesweeper.user.UserAction;
 
 public class Minesweeper implements GameRunnable, GameInitializable {
@@ -24,9 +24,10 @@ public class Minesweeper implements GameRunnable, GameInitializable {
     }
 
     @Override
-    public void initialize(){
+    public void initialize() {
         gameBoard.initializeGame();
     }
+
     @Override
     public void run() {
         outputHandler.showGameStartComment();
@@ -38,9 +39,9 @@ public class Minesweeper implements GameRunnable, GameInitializable {
                 CellPosition cellPosition = getCellInputFromUser();
                 UserAction userAction = getUserActionInputFromUser();
                 actOnCell(cellPosition, userAction);
-            }catch (GameException e){
+            } catch (GameException e) {
                 outputHandler.showExceptionMessage(e);
-            }catch (Exception e){
+            } catch (Exception e) {
                 outputHandler.showSimpleMessage("프로그램에 문제가 생겼습니다.");
             }
         }
@@ -58,7 +59,7 @@ public class Minesweeper implements GameRunnable, GameInitializable {
     private CellPosition getCellInputFromUser() {
         outputHandler.showCommentForSelectionCell();
         CellPosition cellPosition = inputHandler.getCellPositionFromUser();
-        if(gameBoard.isInvalidCellPosition(cellPosition)){
+        if (gameBoard.isInvalidCellPosition(cellPosition)) {
             throw new GameException("잘못된 좌표를 선택하셨습니다.");
         }
         return cellPosition;

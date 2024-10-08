@@ -19,8 +19,8 @@ public class CellSignFinder {
         return CELL_SIGN_PROVIDERS.stream()
                 .filter(provider -> provider.supports(snapshot))
                 .findFirst()
-                .map(provider->provider.provide(snapshot))
-                .orElseThrow(()->new IllegalArgumentException("확인할 수 없는 셀입니다."));
+                .map(provider -> provider.provide(snapshot))
+                .orElseThrow(() -> new IllegalArgumentException("확인할 수 없는 셀입니다."));
 
     }
 }

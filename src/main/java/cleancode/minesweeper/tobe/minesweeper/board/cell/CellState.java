@@ -10,7 +10,7 @@ public class CellState {
         this.isOpened = isOpened;
     }
 
-    public static CellState initialize(){
+    public static CellState initialize() {
         return new CellState(false, false);
     }
 
@@ -19,7 +19,7 @@ public class CellState {
     }
 
     public void open() {
-        isOpened =true;
+        isOpened = true;
     }
 
     public boolean isOpened() {
