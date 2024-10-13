@@ -35,22 +35,20 @@ public class StudyCafePassMachine {
 
             if (doesUserChooseFixedType(studyCafePassType)) {
 
-                List<StudyCafeLockerPass> lockerPasses = getLockerPasses();
-                StudyCafeLockerPass lockerPass = getLockerPass(lockerPasses, selectedPass);
+                StudyCafeLockerPass lockerCandidates = getLockerPass(selectedPass);
 
                 boolean lockerSelection = false;
-                if (lockerPass != null) {
-                    outputHandler.askLockerPass(lockerPass);
+                if (lockerCandidates != null) {
+                    outputHandler.askLockerPass(lockerCandidates);
                     lockerSelection = inputHandler.getLockerSelection();
                 }
 
                 if (lockerSelection) {
-                    outputHandler.showPassOrderSummary(selectedPass, lockerPass);
+                    outputHandler.showPassOrderSummary(selectedPass, lockerCandidates);
                 } else {
                     outputHandler.showPassOrderSummary(selectedPass, null);
                 }
             }
-            
             outputHandler.showPassOrderSummary(selectedPass, null);
 
         } catch (AppException e) {
@@ -60,7 +58,9 @@ public class StudyCafePassMachine {
         }
     }
 
-    private StudyCafeLockerPass getLockerPass(List<StudyCafeLockerPass> lockerPasses, StudyCafePass selectedPass) {
+    private StudyCafeLockerPass getLockerPass(StudyCafePass selectedPass) {
+        List<StudyCafeLockerPass> lockerPasses =fileHandler.readLockerPasses();
+
         return lockerPasses.stream()
             .filter(option ->
                 option.getPassType() == selectedPass.getPassType()
@@ -74,10 +74,6 @@ public class StudyCafePassMachine {
         return studyCafePasses.stream()
             .filter(pass -> pass.isSameType(studyCafePassType))
             .toList();
-    }
-
-    private List<StudyCafeLockerPass> getLockerPasses() {
-        return fileHandler.readLockerPasses();
     }
 
     private List<StudyCafePass> getStudyCafeAllPasses() {
